@@ -16,6 +16,7 @@
   "main": "app.js",
   "scripts": {
     "lint": "npx eslint .",
+    "test": "npm run lint",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
