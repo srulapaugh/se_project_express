@@ -1,4 +1,4 @@
-const ClothingItem = require("../models/clothingItem");
+const ClothingItem = require("../models/clothingitem");
 
 const getClothingItems = (req, res) => {
   ClothingItem.find({})
