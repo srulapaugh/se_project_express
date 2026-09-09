@@ -1,3 +1,4 @@
+const bcrypt = require("bryptjs");
 const User = require("../models/user");
 const {
   BAD_REQUEST,
@@ -19,11 +20,20 @@ const getUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  const { name, avatar } = req.body;
-  User.create({ name, avatar })
-    .then((user) => res.status(201).send(user))
+  const { name, avatar, email, password } = req.body;
+  bcrypt
+    .hash(password, 10)
+    .then((hash) => User.create({ name, avatar, email, password: hash }))
+    .then((user) => {
+      const userObject = user.toObject();
+      delete userObject.password;
+      return res.status(201).send(userObject);
+    })
     .catch((err) => {
       console.log(err.name);
+      if (err.code === 11000) {
+        return res.status(CONFLICT).send({ message: "Email already exists" });
+      }
       if (err.name === "ValidationError") {
         return res.status(BAD_REQUEST).send({ message: "Invalid data" });
       }
