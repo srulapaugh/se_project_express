@@ -1,0 +1,31 @@
+$kind: http-request
+url: "{{base_url}}/users/me"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+      
+      "name": "{{$randomFirstName}} {{$randomLastName}}",
+      "avatar": "{{$randomAvatarImage}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Response should contain a json object", function () {
+          pm.response.to.be.json;
+      });
+
+      pm.test("Status code should be 401", function () {
+          pm.response.to.have.status(401);
+      });
+
+      pm.test("Response body should have error message", function () {
+          pm.expect(pm.response.json()).to.have.property("message", "Authorization required");
+      });
+
+      pm.test("Response body shouldn't have a password hash", function () {
+          pm.expect(pm.response.json()).to.not.have.property("password");
+      });
+settings: {}
+order: 2000

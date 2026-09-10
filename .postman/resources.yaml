@@ -1,4 +1,7 @@
 workspace:
   id: 411beeda-67ca-42fd-8d5f-60c6c5f89b4c
 cloudResources:
-  collections: {}
+  collections:
+    ../postman/collections/Sprint 13 Tests: 57602678-d49c4ea6-4fc3-4e0e-bbb9-f09ed3765aac
+    ../postman/collections/Sprint 12 Tests: 57602678-7407819f-ad2e-471f-9e3d-bbe5350d9d4f
+    ../postman/collections/My Collection: 57602678-d94c1517-ee66-435f-8b44-3b0cb7599585
