@@ -1,9 +1,12 @@
 const bcrypt = require("bryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const { JWT_SECRET } = require("../utils/config");
 const {
   BAD_REQUEST,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
+  CONFLICT,
 } = require("../utils/errors");
 
 const getUsers = (req, res) => {
@@ -43,6 +46,21 @@ const createUser = (req, res) => {
     });
 };
 
+const login = (req, res) => {
+  const { email, password } = req.body;
+  User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+        expiresIn: "7d",
+      });
+      res.send({ token });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(UNAUTHORIZED).send({ message: "Incorrect email or password" });
+    });
+};
+
 const getUser = (req, res) => {
   const { userId } = req.params;
   User.findById(userId)
@@ -64,4 +82,4 @@ const getUser = (req, res) => {
     });
 };
 
-module.exports = { getUsers, createUser, getUser };
+module.exports = { getUsers, createUser, getUser, login };
