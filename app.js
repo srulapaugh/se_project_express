@@ -6,6 +6,14 @@ const app = express();
 
 const { PORT = 3001 } = process.env;
 
+app.use((req, res, next) => {
+  req.user = {
+    _id: "",
+  };
+
+  next();
+});
+
 app.use(express.json());
 
 app.use("/", mainRouter);
