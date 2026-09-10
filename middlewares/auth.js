@@ -10,7 +10,12 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace("Bearer ", "");
-  const payload = jwt.verify(token, JWT_SECRET);
+  let payload;
+  try {
+    payload = jwt.verify(token, JWT_SECRET);
+  } catch (err) {
+    return res.status(UNAUTHORIZED).send({ message: "Authorization required" });
+  }
 
   req.user = payload;
   next();
