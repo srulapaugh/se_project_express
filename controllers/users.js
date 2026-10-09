@@ -8,7 +8,7 @@ const {
   INTERNAL_SERVER_ERROR,
   CONFLICT,
   UNAUTHORIZED,
-} = require("../utils/errors");
+} = require("../middlewares/error-handler");
 
 const getUsers = (req, res) => {
   User.find({})

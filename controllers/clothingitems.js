@@ -4,7 +4,7 @@ const {
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   FORBIDDEN,
-} = require("../utils/errors");
+} = require("../middlewares/error-handler");
 
 const getClothingItems = (req, res) => {
   ClothingItem.find({})
