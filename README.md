@@ -1,6 +1,9 @@
 # WTWR (What to Wear?): Back End
 
-The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
+The back end of the WTWR application: a REST API server that stores users and
+clothing items and handles registration, login, and authorization. The front end
+uses it to show clothing suggestions based on the current weather, let users
+save their own items, and like or unlike items.
 
 ## Running the Project
 
@@ -16,7 +19,8 @@ Video Demonstration:
 https://www.loom.com/share/a8617be570764cf7a9a9d2b0b1eff330
 
 Deployed Project Link:
-www.weatherboy.jedimasters.net
+https://www.weatherboy.jedimasters.net
+https://api.weatherboy.jedimasters.net
 
 Front End Repo:
 https://github.com/srulapaugh/se_project_react
